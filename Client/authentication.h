@@ -15,7 +15,7 @@ bool attemptUserLogin(int sd, int user_type)
   while (scanf("%d", &currUser.userID) != 1 || getchar() != '\n')
   {
     scanf("%*[^\n]%*c");
-    printf("you must enter an integer: ");
+    printf("enter an integer: ");
   }
   char *pass = getpass("Password: ");
   memcpy(currUser.password, pass, sizeof(pass));

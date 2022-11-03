@@ -56,13 +56,13 @@ int get_latest_user()
 user search_user(int ID)
 {
   user currUser;
-  printf("%d \n", get_latest_user());
-  if (ID < 1000 || ID > get_latest_user())
+  // printf("%d \n", get_latest_user());
+  if (ID < 1 || ID > get_latest_user())
   {
     currUser.userID = -1;
     return currUser;
   }
-  int i = ID - 1000;
+  int i = ID - 1;
   int fd = open("users", O_RDONLY, 0744);
   struct flock lock;
 
@@ -91,7 +91,7 @@ void create_user(int nsd)
   if (!size)
   {
     lock_record(lock, F_WRLCK, SEEK_END, fd, 0, 0);
-    newUser.userID = 1000;
+    newUser.userID = 1;
     s = write(fd, &newUser, sizeof(user));
     unlock_record(lock, fd);
   }
@@ -119,11 +119,11 @@ void create_user(int nsd)
 
 bool delete_user(int ID)
 {
-  if (ID < 1000 || ID > get_latest_user())
+  if (ID < 1 || ID > get_latest_user())
   {
     return false;
   }
-  int i = ID - 1000;
+  int i = ID - 1;
   int fd = open("users", O_RDWR, 0744);
   bool result;
 
@@ -155,11 +155,11 @@ bool delete_user(int ID)
 
 bool modify_user(user modUser)
 {
-  if (modUser.userID < 1000 || modUser.userID > get_latest_user())
+  if (modUser.userID < 1 || modUser.userID > get_latest_user())
   {
     return false;
   }
-  int i = modUser.userID - 1000;
+  int i = modUser.userID - 1;
   int fd = open("users", O_RDWR, 0744);
   bool result = false;
 

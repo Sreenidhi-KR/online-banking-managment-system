@@ -15,7 +15,7 @@ int main()
   server.sin_addr.s_addr = inet_addr("127.0.0.1");
   server.sin_port = htons(8083);
   connect(sd, (struct sockaddr *)&server, sizeof(server));
-  printf("\e[1;1H\e[2J");
+  printf("\e[1;1H\e[2J"); // clear screen
   while (1)
   {
 
@@ -24,8 +24,8 @@ int main()
     int choice;
     while (scanf("%d", &choice) != 1 || getchar() != '\n')
     {
-      scanf("%*[^\n]%*c");
-      printf("you must enter an integer: ");
+      scanf("%*[^\n]%*c"); // TO CLEAR INPUT BUFFER
+      printf("Enter an integer: ");
     }
     write(sd, &choice, sizeof(choice));
     switch (choice)

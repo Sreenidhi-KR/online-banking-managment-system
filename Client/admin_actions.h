@@ -244,7 +244,7 @@ void show_admin_menu(int sd)
     else if (choice == 5)
     {
       printf("\e[1;1H\e[2J");
-      printf("\n\n\t\tThanks for visiting us\n\t*********Have a nice day*********\n\n\n");
+      printf("\n\n\t\tThank You\n\n\n");
       exit(0);
     }
     else

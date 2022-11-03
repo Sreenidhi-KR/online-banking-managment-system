@@ -3,7 +3,7 @@
 #include "admin_actions.h"
 user view_user_details(int ID)
 {
-  int i = ID - 1000;
+  int i = ID - 1;
   user currUser;
   int fd = open("Users", O_RDONLY, 0744);
   struct flock lock;
@@ -23,7 +23,7 @@ void view_transaction(int acc, int nsd)
 {
   char acc_no[5];
   sprintf(acc_no, "%d", acc);
-  printf("%s", acc_no);
+  // printf("%s", acc_no);
   int fd = open(acc_no, O_RDONLY, 0744);
   int index = -1;
   if (fd == -1)
@@ -50,7 +50,7 @@ void view_transaction(int acc, int nsd)
 
 bool deposit(int ID, int amt)
 {
-  int i = ID - 1000;
+  int i = ID - 1;
   int fd = open("Users", O_RDWR, 0744);
   bool result;
   int fl1;
@@ -90,7 +90,7 @@ bool deposit(int ID, int amt)
 
 bool withdraw(int ID, int amt)
 {
-  int i = ID - 1000;
+  int i = ID - 1;
   int fd = open("Users", O_RDWR, 0744);
   bool result;
   int fl1;
@@ -98,7 +98,7 @@ bool withdraw(int ID, int amt)
   lock_record(lock, F_WRLCK, SEEK_SET, fd, i, sizeof(user));
 
   user currUser;
-  lseek(fd, (i) * sizeof(user), SEEK_SET); // changing the file pointer to the selected record
+  lseek(fd, (i) * sizeof(user), SEEK_SET);
   read(fd, &currUser, sizeof(user));
 
   if (!strcmp(currUser.status, "ACTIVE") && currUser.balance >= amt)
@@ -130,7 +130,7 @@ bool withdraw(int ID, int amt)
 
 int balance_enquiry(int ID)
 {
-  int i = ID - 1000;
+  int i = ID - 1;
   int result;
   int fd = open("Users", O_RDONLY, 0744);
   user temp;
@@ -154,7 +154,7 @@ int balance_enquiry(int ID)
 
 bool change_password(int ID, char newPwd[10])
 {
-  int i = ID - 1000;
+  int i = ID - 1;
 
   int fd = open("Users", O_RDWR, 0744);
   bool result;
@@ -194,7 +194,7 @@ void show_client_menu(int nsd, int currUserID)
     {
       int amt;
       read(nsd, &amt, sizeof(int));
-      printf("%d  AMOUnt \n", amt);
+      // printf("%d  AMOUnt \n", amt);
       result = deposit(currUserID, amt);
       write(nsd, &result, sizeof(result));
     }

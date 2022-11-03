@@ -21,7 +21,7 @@ bool attempt_admin_login(int nsd)
 }
 bool check_user(user currUser)
 {
-  int i = currUser.userID - 1000;
+  int i = currUser.userID - 1;
   int fd = open("Users", O_RDONLY, 0744);
   bool result;
   user temp;
@@ -32,8 +32,8 @@ bool check_user(user currUser)
 
   lseek(fd, (i) * sizeof(user), SEEK_SET);
   read(fd, &temp, sizeof(user));
-  printf("Password actual: %s\n", temp.password);
-  printf("id: %d\n", currUser.userID);
+  // printf("Password actual: %s\n", temp.password);
+  // printf("id: %d\n", currUser.userID);
   if (!strcmp(temp.password, currUser.password) && currUser.userID == temp.userID && !strcmp(temp.status, "ACTIVE") && temp.user_type == currUser.user_type)
     result = true;
   else
@@ -68,7 +68,7 @@ void attempt_login(int nsd)
     result = attempt_user_login(nsd);
     if (!result)
     {
-      printf("\nInvalid Credintials\n");
+      // printf("\nInvalid Credintials\n");
       return;
     }
     else
@@ -80,7 +80,7 @@ void attempt_login(int nsd)
     result = attempt_admin_login(nsd);
     if (!result)
     {
-      printf("\nInvalid Credintials\n");
+      // printf("\nInvalid Credintials\n");
       return;
     }
     else
